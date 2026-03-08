@@ -3,9 +3,10 @@ workflows:
     name: QSUK APK Builder
     max_build_duration: 30
     environment:
-      android: latest
       vars:
         MODULE_PATH: "app"
+      groups:
+        - qsuk
     scripts:
       - name: Сборка APK
         script: |
