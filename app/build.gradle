@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.my.myapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.my.myapp"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        // Добавляем поле BuildConfig.WORKER_KEY, которое будет браться из переменной окружения
+        buildConfigField "String", "WORKER_KEY", "\"${System.getenv('WORKER_KEY')}\""
+        // Для отладки можно указать запасное значение, если переменная не задана
+        // buildConfigField "String", "WORKER_KEY", "\"${System.getenv('WORKER_KEY') ?: '000.000'}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.core:core:1.9.0'
+}
